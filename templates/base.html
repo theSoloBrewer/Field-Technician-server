@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- begin variable head section -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="UTF-8">
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js')}}"></script>
+	<!--<script
+		src="https://code.jquery.com/jquery-3.3.1.js"
+		integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+		crossorigin="anonymous"></script>-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous" type="text/javascript"></script>
+		
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style/header.css') }}" type="text/css" >
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style/aside.css') }}" type="text/css" >
+{% block head %}
+{% endblock %}
+<!-- end head section -->
+<title>{{ title }} - Field Technician</title>
+</head>
+<body>
+<!-- begin variable header_body section -->
+{% block header_html %}{% include "header.html" %}{% endblock %}
+<!-- end header_body section -->
+<!--{% include "aside.html" %}-->
+<!-- begin variable body_html section -->
+{% block body_html %}{% endblock %}
+<!-- end body_html section -->
+<!-- begin variable footer_html section -->
+{% block footer_html %}{% endblock %}
+<!-- end footer_html section -->
+<script type="text/javascript">
+<!-- begin variable body_script section -->
+{% block body_script %}{% endblock %}
+<!-- end body_script section -->
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block body_html %}
+{{ super() }}
+<div class="container center-block" style="width:650px">
+	<h2 id="loginTitle" style="display:inline" >Login to Your Account</h2>
+	<div class="form-row">
+		<form class="form-inline" action="login" method=post>
+		<div class="form-group ">
+		<input class="form-control" type="text" name="user" placeholder="Username">
+		<input class="form-control" type="password" name="pass" placeholder="Password">
+		</div>
+		<input type="submit" name="login" class="login loginmodal-submit" value="Login">
+		</form>
+	</div>
+	<div class="form-row">
+		<a href="#">Register</a> - <a href="#">Forgot Password</a>
+	</div>
+</div>
+{% endblock %}
+{% if not session.logged_in %}
+<script>
+//$('#login-modal').modal({show: 'true'});
+</script>
+{% endif %}
