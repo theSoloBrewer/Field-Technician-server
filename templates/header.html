@@ -14,6 +14,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="{% if active=='home' %}active{%endif %}"><a href="/"><span class="glyphicon glyphicon-home"></span>Dashboard</a></li>
+                {% if current_user.is_authenticated %}
                 <li class="{% if active=='calendar' %}active{%endif %}"><a href="calendar" ><span class="glyphicon glyphicon-calendar"></span>Calendar</a></li>
                 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
                     class="glyphicon glyphicon-list-alt"></span>Tools <b class="caret"></b></a>
@@ -47,6 +48,7 @@
                         </li>
                     </ul>
                 </li>
+                {% endif %}
             </ul>
 			{% if current_user.is_authenticated %}
             <ul class="nav navbar-nav navbar-right">
@@ -79,13 +81,13 @@
                         <li><a href="#"><span class="glyphicon glyphicon-user"></span>Profile</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-cog"></span>Settings</a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
+                        <li><a href="/logout"><span class="glyphicon glyphicon-off"></span>Logout</a></li>
                     </ul>
                 </li>
             </ul>
 			{% else %}
 			<ul class="nav navbar-nav navbar-right">
-                <li><a href="#" id="navSignIn" >Log In</a></li>
+                <li><a href="/login" id="navSignIn" >Log In</a></li>
 				<li><a href="/register" id="navReg" >Sign Up</a></li>
             </ul>
 			{% endif %}
@@ -95,10 +97,6 @@
 <script>
  $(document).ready(function () {
 	$("#{{active}}").parents('li').addClass("active");
-
-	 $("#navSignIn").click(function() {
-			$('#login-modal').modal({show: 'true'});
-	}); 
 });
 </script>
 </header>
