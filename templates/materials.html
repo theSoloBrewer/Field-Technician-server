@@ -17,11 +17,13 @@
 			<div class="form-group col-md-4">
 				<label for="exampleFormControlSelect1">Device Type:</label>
 				<select class="form-control col-1" id="exampleFormControlSelect1">
-				  <option>1</option>
-				  <option>2</option>
-				  <option>3</option>
-				  <option>4</option>
-				  <option>5</option>
+
+				{% for opt in types %}
+
+				  <option>{{ opt.type_name }}</option>
+
+				 {% endfor %}
+
 				</select>
 			  </div>
 		 </div>
