@@ -11,22 +11,54 @@
 		</div>
 		<div class="row">
 			<div class="form-group col-md-2">
+				<label for="modelControlSet">Model Number: </label>
+					<input class="form-control" type="text" name="model" placeholder="Model Number">
+			</div>
+			<div class="form-group col-md-2">
 			<label for="snControlSet">Serial Number: </label>
 				<input class="form-control" type="text" name="serial" placeholder="S/N">
 			</div>
 			<div class="form-group col-md-4">
-				<label for="exampleFormControlSelect1">Device Type:</label>
-				<select class="form-control col-1" id="exampleFormControlSelect1">
-
-				{% for opt in types %}
-
-				  <option>{{ opt.type_name }}</option>
-
-				 {% endfor %}
-
+				<label for="devTypeFormControlSelect">Device Type:</label>
+				<select class="form-control col-1" name="devType">
+					{% for opt in types %}
+					<option value="{{ opt.t_id}}">{{ opt.type_name }}</option>
+					{% endfor %}
 				</select>
-			  </div>
+			</div>
 		 </div>
+		 <div class="row ">
+			<div class="form-group col-md-4">
+				<label for="mfFormControlSelect">Distributor: </label>
+				<select class="form-control col-1" name="manufacture">
+					{% for opt in distributors %}
+					<option value="{{ opt.c_id}}">{{ opt.contact_name }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="card border-info mb-3" style="width:18rem">
+				<div class="card-header">Distributor</div>
+				<div class="card-body text-info">
+				<div class="card-text">
+					
+						<label>Name</label>
+					
+						<label>Phone</label>
+					
+						<label>Email</label>
+					
+					</div>
+				</div>
+			</div>
+			
+			<div class="card border-info mb-3" style="max-width: 18rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body text-info">
+    <h5 class="card-title">Info card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+		</div>
 	</form>
 </div>
 {% endblock %}

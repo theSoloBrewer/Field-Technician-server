@@ -56,7 +56,8 @@ def send_static( asset, page):
 @FTserver.route('/materials')
 def material():
 	types = Type.query
-	return render_template("materials.html", active='materials', title='Materials', types=types)
+	dist = Contact_Info.query.filter(Contact_Info.c_type_id=='7').all()
+	return render_template("materials.html", active='materials', title='Materials', types=types, distributors=dist)
 @FTserver.route('/calendar')
 def path():
 	return render_template("calendar.html", active='calendar', title='Calendar')
