@@ -1,4 +1,25 @@
-This is a database migration repository.
+## Configuring Development Environment:
 
-More information at
-http://code.google.com/p/sqlalchemy-migrate/
+### Requirements
+
+* [Python] (https://www.python.org/downloads/release/python-364/) (Python 3.6.4 or higher)
+* Pip 
+* [Git](https://git-scm.com/downloads)
+* [Flask](http://flask.pocoo.org/)
+
+### Setup
+
+* Make sure all the required software mentioned above are installed.
+* Clone the repository into your development machine. [*info*](https://help.github.com/articles/working-with-repositories)
+* Download and install all required python modules
+  pip install -r requirements.txt
+
+### Development
+
+* CD into Field-Technician-server
+* run python main.py --debug to start the webservice
+
+### License
+
+* [GNU AGPL v3](http://www.gnu.org/licenses/agpl.html)
+* Copyright 2016-2018
