@@ -19,7 +19,7 @@ def register():
 	user = User(request.form['username'] , request.form['password'], cInfo)
 	db.session.add(user)
 	db.session.commit()
-	flash('User successfully registered')
+	flash('User successfully registered', 'success')
 	return redirect(url_for('login'))
 
 
@@ -31,16 +31,19 @@ def login():
 	# handle this for us, and we use a custom LoginForm to validate.
 	if request.method == 'GET':
 		return render_template('login.html', active='login')
-
+	error = None
 	username = request.form['user']
 	password = request.form['pass']
 	registered_user = User.query.filter_by(username=username,password=password).first()
 	if registered_user is None:
-		flash('Username or Password is invalid' , 'error')
-		return redirect(url_for('login'))
-	login_user(registered_user)
-	flash('Logged in successfully')
-	return redirect(request.args.get('next') or url_for('index'))
+		flash(u'Invalid username or password. Please try again!', 'danger')
+	else:
+		login_user(registered_user)
+		flash('You were successfully logged in', 'success')
+		return redirect(url_for('index'))
+
+	return render_template('login.html', error = error)
+
 
 @FTserver.route('/logout')
 def logout():
@@ -58,6 +61,7 @@ def material():
 	types = Type.query
 	dist = Contact_Info.query.filter(Contact_Info.c_type_id=='7').all()
 	return render_template("materials.html", active='materials', title='Materials', types=types, distributors=dist)
+
 @FTserver.route('/calendar')
 def path():
 	return render_template("calendar.html", active='calendar', title='Calendar')

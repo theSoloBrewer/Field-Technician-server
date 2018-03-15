@@ -1,64 +1,73 @@
 {% extends "base.html" %}
 {% block body_html %}
 {{ super() }}
-<div class="container col-md-offset-3">
+<div class="container mx-auto">
+	<div class="row h-100 justify-content-center mt-5">
 	<form>
-		<div class="row ">
-			<div class="form-group col-md-4">
-			<label for="nameControlSet">Name: </label>
-				<input class="form-control" type="text" name="name" placeholder="Material Name">
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<label class="pr-2 col-form-label" for="nameControlSet">Name: </label>
 			</div>
+				<input class="form-control col-6" type="text" name="name" placeholder="Material Name">
+
 		</div>
-		<div class="row">
-			<div class="form-group col-md-2">
-				<label for="modelControlSet">Model Number: </label>
-					<input class="form-control" type="text" name="model" placeholder="Model Number">
-			</div>
-			<div class="form-group col-md-2">
-			<label for="snControlSet">Serial Number: </label>
-				<input class="form-control" type="text" name="serial" placeholder="S/N">
-			</div>
-			<div class="form-group col-md-4">
-				<label for="devTypeFormControlSelect">Device Type:</label>
-				<select class="form-control col-1" name="devType">
+		<div class="form-group row justify-content-center">
+			<div class="col">
+				<label class="pr-1 col-form-label" for="modelControlSet">Model Number: </label>
+
+				<input class="form-control " type="text" name="model" placeholder="Model Number" >
+			</div><div class="col">
+				<label class="pr-1 col-form-label" for="snControlSet">Serial Number: </label>
+
+				<input class="form-control " type="text" name="serial" placeholder="S/N" >
+			</div><div class="col">
+				<label class="pr-1 col-form-label" for="devTypeFormControlSelect">Device Type:</label>
+
+				<select class="form-control " name="devType" >
 					{% for opt in types %}
 					<option value="{{ opt.t_id}}">{{ opt.type_name }}</option>
 					{% endfor %}
 				</select>
 			</div>
-		 </div>
-		 <div class="row ">
-			<div class="form-group col-md-4">
-				<label for="mfFormControlSelect">Distributor: </label>
-				<select class="form-control col-1" name="manufacture">
-					{% for opt in distributors %}
-					<option value="{{ opt.c_id}}">{{ opt.contact_name }}</option>
-					{% endfor %}
-				</select>
-			</div>
-			<div class="card border-info mb-3" style="width:18rem">
-				<div class="card-header">Distributor</div>
-				<div class="card-body text-info">
-				<div class="card-text">
-					
-						<label>Name</label>
-					
-						<label>Phone</label>
-					
-						<label>Email</label>
-					
+		</div>
+		 <div class="row form-group">
+			<div class="col">
+				<div class="row">
+					<div class="col">
+						<label class="col-form-label" for="mfFormControlSelect">Distributor: </label>
+						<select class="form-control" name="manufacture">
+							{% for opt in distributors %}
+							<option value="{{ opt.c_id}}">{{ opt.contact_name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label class="col-form-label" for="mfFormControlSelect">Manufacturer: </label>
+						<input class="form-control " type="text" name="manu" placeholder="Manufacturer" >
 					</div>
 				</div>
 			</div>
-			
-			<div class="card border-info mb-3" style="max-width: 18rem;">
-  <div class="card-header">Header</div>
-  <div class="card-body text-info">
-    <h5 class="card-title">Info card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
+			<div class="col d-flex">
+				<div class="card border-info mb-3" style="width:18rem; height:100%;">
+					<div class="card-header" id="distCardHeader">Distributor</div>
+					<div class="card-body text-info">
+					<div class="card-text" id="distCardText">
+
+							<label>Name</label>
+
+							<label>Phone</label>
+
+							<label>Email</label>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		</div>
 	</form>
+	</div>
 </div>
 {% endblock %}
