@@ -2,8 +2,8 @@
 
 ### Requirements
 
-* [Python] (https://www.python.org/downloads/release/python-364/) (Python 3.6.4 or higher)
-* Pip 
+* [Python](https://www.python.org/downloads/release/python-364/) (Python 3.6.4 or higher)
+* [pip](https://pypi.python.org/pypi/pip)
 * [Git](https://git-scm.com/downloads)
 * [Flask](http://flask.pocoo.org/)
 
