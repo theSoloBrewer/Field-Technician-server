@@ -7,6 +7,7 @@ Cython==0.27.1
 decorator==4.1.2
 Flask==0.12.2
 Flask-Login==0.4.0
+flask-marshmallow==0.8.0
 Flask-RESTful==0.3.6
 Flask-SQLAlchemy==2.3.2
 Flask-WhooshAlchemy==0.56
@@ -16,6 +17,7 @@ itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
 marshmallow==2.15.0
+marshmallow-sqlalchemy==0.13.2
 numpy==1.13.3
 pandas==0.21.1
 pbr==3.1.1

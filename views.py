@@ -1,7 +1,7 @@
 from project import FTserver, db
 from flask_login import LoginManager, login_user, logout_user
-from flask import send_from_directory, render_template, request, flash, redirect, url_for
-from models import User, Contact_Info, Type
+from flask import send_from_directory, render_template, request, flash, redirect, url_for, jsonify
+from models import *
 
 login = LoginManager(FTserver)
 
@@ -56,11 +56,16 @@ def send_static( asset, page):
 	print('asset')
 	return send_from_directory("/templates/static/" +asset, page, active=page, title=page, db=db)
 
-@FTserver.route('/materials')
+@FTserver.route('/materials', methods=['GET','POST'])
 def material():
+	if request.method == 'POST' and request.form['dist']:
+		ciS = ciSchema()
+		d = Contact_Info.query.get(request.form['dist_id'])
+		return jsonify(ciS.dump(d).data)
 	types = Type.query
 	dist = Contact_Info.query.filter(Contact_Info.c_type_id=='7').all()
 	return render_template("materials.html", active='materials', title='Materials', types=types, distributors=dist)
+
 
 @FTserver.route('/calendar')
 def path():

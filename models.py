@@ -3,7 +3,7 @@ Created on Nov 13, 2017
 
 @author: theSoloBrewer
 '''
-from project import db
+from project import db, MA
 import random
 from marshmallow import Schema, fields, pprint
 from flask_login import UserMixin
@@ -14,10 +14,12 @@ class Type(db.Model):
 	#material_location = db.relationship('Material_Location', backref='type',lazy=True)
 	def __init__(self,name=''):
 		self.type_name = name
-		
-	def __repr__(self):
-		return '<Type(name={self.type_name!r})>'.format(self=self)
 
+		
+class typeSchema(MA.ModelSchema):
+	class Meta:
+		model = Type
+		
 class Contact_Info(db.Model):
 	__tablename__ = 'contact_info'
 	c_id = db.Column(db.Integer, primary_key=True)
@@ -37,10 +39,9 @@ class Contact_Info(db.Model):
 			self.contact_name
 		)
 
-
-class typeSchema(Schema):
-	t_id= fields.Int()
-	type_name=fields.Str()
+class ciSchema(MA.ModelSchema):
+	class Meta:
+		model = Contact_Info
 
 class Address(db.Model):
 	a_id = db.Column(db.Integer, primary_key=True)
@@ -91,10 +92,9 @@ class Material_Location(db.Model):
 			self.__class__.__name__,
 			self.ml_name
 		)
-class mlSchema(Schema):
-	ml_id=fields.Int()
-	ml_name=fields.Str()
-	type=fields.Nested(typeSchema)
+class mlSchema(MA.ModelSchema):
+	class Meta:
+		model = Material_Location
 
 class Material(db.Model):
 	m_id = db.Column(db.Integer, primary_key=True)
@@ -119,13 +119,9 @@ class Material(db.Model):
 			self.mat_name
 		)
 		
-class materialSchema(Schema):
-	m_id=fields.Int()
-	mat_name=fields.Str()
-	sn=fields.Str()
-	status=fields.Boolean()
-	type=fields.Nested(typeSchema)
-	location=fields.Nested(mlSchema)
+class materialSchema(MA.ModelSchema):
+	class Meta:
+		model = Material
 
 class User(UserMixin, db.Model):
 	u_id = db.Column(db.Integer, primary_key=True)
