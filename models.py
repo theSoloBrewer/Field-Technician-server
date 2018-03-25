@@ -15,11 +15,11 @@ class Type(db.Model):
 	def __init__(self,name=''):
 		self.type_name = name
 
-		
+
 class typeSchema(MA.ModelSchema):
 	class Meta:
 		model = Type
-		
+
 class Contact_Info(db.Model):
 	__tablename__ = 'contact_info'
 	c_id = db.Column(db.Integer, primary_key=True)
@@ -77,7 +77,7 @@ labor_project = db.Table('labor_project',db.Model.metadata,
 						 db.Column('project_id',db.Integer, db.ForeignKey('project.p_id')),
 						 db.Column('labor_id',db.Integer, db.ForeignKey('labor.l_id'))
 						 )
-		
+
 class Material_Location(db.Model):
 	__tablename__ = 'material_location'
 	ml_id = db.Column(db.Integer, primary_key=True)
@@ -118,7 +118,7 @@ class Material(db.Model):
 			self.__class__.__name__,
 			self.mat_name
 		)
-		
+
 class materialSchema(MA.ModelSchema):
 	class Meta:
 		model = Material
@@ -138,19 +138,19 @@ class User(UserMixin, db.Model):
 		self.password = password
 		self.contact = contact
 
-		
+
 	def is_authenticated(self):
 		return True
- 
+
 	def is_active(self):
 		return True
- 
+
 	def is_anonymous(self):
 		return False
- 
+
 	def get_id(self):
 		return str(self.u_id)
- 
+
 	def __repr__(self):
 		return '<User %r>' % (self.username)
 
@@ -177,11 +177,10 @@ class Project(db.Model):
 	description = db.Column(db.Text)
 	location_id = db.Column(db.Integer, db.ForeignKey('address.a_id'))
 	location = db.relationship('Address')
-	#materials_ids = db.Column(db.Integer, db.ForeignKey('material_project.id'))
+	poc_id = db.Column(db.Integer, db.ForeignKey('contact_info.c_id'))
+	poc = db.relationship('Contact_Info')
 	material = db.relationship('Material', secondary=material_project, backref='project')
-	#users_ids = db.Column(db.Integer, db.ForeignKey('user_project.id'))
 	users = db.relationship('User', secondary=user_project, backref='project')
-	#labor_ids = db.Column(db.Integer, db.ForeignKey('labor_project.id'))
 	labor = db.relationship('Labor', secondary=labor_project, backref='project')
 	def __init__(self,name,code,desc=None,location=None,material=[],user=[],labor=[]):
 		self.pro_name = name

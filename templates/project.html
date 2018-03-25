@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block body_html %}
+{{ super() }}
+<div class="container mx-auto">
+
+	<form>
+		<div class="d-flex mt-5">
+			<div class="d-flex flex-column p-2" style="flex:1">
+				<div class="flex-row">
+						<label class="pr-2 col-form-label" for="nameControlSet">Title: </label>
+						<input class="form-control" type="text" name="name" placeholder="Project Title">
+				</div>
+				<div class="flex-row">
+						<label class="pr-1 col-form-label" for="codeControlSet">Project Code: </label>
+						<input class="form-control" type="text" name="code" placeholder="Job Code" >
+				</div>
+				<div class="flex-row h-100" style="flex-grow:1">
+					<div class="d-flex flex-column h-100" style="flex-grow:1">
+						<label class="pr-1 col-form-label" for="descControlSet">Description: </label>
+
+						<textarea class="form-control h-100" type="text" name="description" placeholder="Brief Description of Project" ></textarea>
+				</div></div>
+			</div>
+			<div class="d-flex flex-column p-2">
+
+				<div class="flex-row p-1">
+					<div class="card border-info" style="width:18rem; height:100%;">
+						<div class="card-header" id="locCardHeader">Point of Contact</div>
+						<div class="card-body text-info p-0 pt-2 px-3">
+						<div class="card-text" id="locCardText">
+								<div class="row">
+								<div class="col-4">
+								<label>Name:</label>
+								</div>
+								<div class="col-6">
+								<label id="pocCardName"></label>
+								</div>
+								</div>
+								<div class="row">
+								<div class="col-4">
+								<label>Email:</label>
+								</div>
+								<div class="col-6">
+								<label id="pocCardEmail"></label>
+								</div>
+								</div>
+								<div class="row">
+								<div class="col-4">
+								<label>Phone:</label>
+								</div>
+								<div class="col-6">
+								<label id="pocCardPhone"></label>
+								</div>
+								</div>
+								<div class="row">
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="distCardEdit">Edit</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script>
+					</script>
+				</div>
+				<div class="flex-row p-1">
+					<div class="card border-info" style="width:18rem; height:100%;">
+						<div class="card-header" id="locCardHeader">Address</div>
+						<div class="card-body text-info p-0 pt-2 px-3">
+						<div class="card-text" id="locCardText">
+								<div class="row">
+								<div class="col-4">
+								<label>Street:</label>
+								</div>
+								<div class="col-6">
+								<label id="locCardStreet"></label>
+								</div>
+								</div>
+								<div class="row">
+								<div class="col-4">
+								<label>City:</label>
+								</div>
+								<div class="col-6">
+								<label id="locCardCity"></label>
+								</div>
+								</div>
+								<div class="row">
+								<div class="col-4">
+								<label>State:</label>
+								</div>
+								<div class="col-6">
+								<label id="locCardState"></label>
+								</div>
+								</div>
+								<div class="row">
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="distCardEdit">Edit</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<script>
+					</script>
+				</div>
+
+			</div>
+		</div>
+	</form>
+	<div class="d-flex flex-row p-2">
+		<div class="card border-info w-100">
+			<div class="card-header">Materials</div>
+			<div class="card-body text-info">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Model</th>
+						<th scope="col">Type</th>
+						<th scope="col">S/N</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for m in materials %}
+					<tr>
+						<th scope="row">1</th>
+						<td>{{ m.mat_name }}</td>
+						<td>{{ m.mat_model }}</td>
+						<td>{{ m.type.name }}</td>
+						<td>{{ m.sn }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="row">
+				<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="materialAdd">Add</button>
+			</div>
+			</div>
+		</div>
+
+	</div>
+		<div class="form-group row" style="display:none">
+			<div class="col">
+					<div class="row">
+						<div class="col">
+							<label class="col-form-label" for="mfFormControlSelect">Distributor: </label>
+							<select class="form-control" name="dist" id="dist">
+								<option></option>
+								{% for opt in distributors %}
+								<option value="{{ opt.c_id}}">{{ opt.contact_name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<label class="col-form-label" for="mfFormControlSelect">Manufacturer: </label>
+							<input class="form-control " type="text" name="manu" placeholder="Manufacturer" >
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+</div>
+{% endblock %}

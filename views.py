@@ -57,7 +57,7 @@ def send_static( asset, page):
 	return send_from_directory("/templates/static/" +asset, page, active=page, title=page, db=db)
 
 @FTserver.route('/materials', methods=['GET','POST'])
-def material():
+def materialView():
 	if request.method == 'POST' and request.form['dist']:
 		ciS = ciSchema()
 		d = Contact_Info.query.get(request.form['dist_id'])
@@ -66,9 +66,14 @@ def material():
 	dist = Contact_Info.query.filter(Contact_Info.c_type_id=='7').all()
 	return render_template("materials.html", active='materials', title='Materials', types=types, distributors=dist)
 
+@FTserver.route('/project/<string:act>', methods=['GET','POST'])
+def projectView(act):
+	if act == 'new':
+		return render_template("project.html", active='cProject', title='New Project')
+	return render_template("project.html", active='eProject', title='Edit Project')
 
 @FTserver.route('/calendar')
-def path():
+def calendarView():
 	return render_template("calendar.html", active='calendar', title='Calendar')
 
 
@@ -77,5 +82,5 @@ def favicon():
 	return ''
 @FTserver.route('/')
 @FTserver.route('/index')
-def index():
+def indexView():
 	return render_template('index.html', title='Home', active='home')

@@ -3,7 +3,7 @@
 {{ super() }}
 <div class="container mx-auto">
 	<div class="row h-100 justify-content-center mt-5">
-	<form>
+	<form style="width:37.87rem">
 		<div class="form-group row">
 			<div class="col-sm-10">
 				<label class="pr-2 col-form-label" for="nameControlSet">Name: </label>
@@ -81,8 +81,8 @@
 					$(document).ready(function() {
 
 						$('#dist').change(function() {
-							var jqxhr = $.post( 
-									"{{ url_for('material') }}",
+							var jqxhr = $.post(
+									"{{ url_for('materialView') }}",
 									{'dist': 'True', 'dist_id': $('#dist').val() },
 									function(data) {
 										$('#distCardHeader').html( data['contact_name'] )
