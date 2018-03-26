@@ -4,7 +4,7 @@ Created on Dec 12, 2017
 @author: theSoloBrewer
 '''
 from project import FTserver
-import views
+import views, api
 
 
 import optparse
