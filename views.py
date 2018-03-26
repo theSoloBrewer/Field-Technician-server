@@ -40,7 +40,7 @@ def login():
 	else:
 		login_user(registered_user)
 		flash('You were successfully logged in', 'success')
-		return redirect(url_for('index'))
+		return redirect(url_for('indexView'))
 
 	return render_template('login.html', error = error)
 

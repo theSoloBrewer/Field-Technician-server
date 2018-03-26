@@ -24,6 +24,7 @@
 				<label class="pr-1 col-form-label" for="devTypeFormControlSelect">Device Type:</label>
 
 				<select class="form-control " name="devType" >
+					<option value="0"></option>
 					{% for opt in types %}
 					<option value="{{ opt.t_id}}">{{ opt.type_name }}</option>
 					{% endfor %}
