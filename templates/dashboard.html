@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/pagination.js')}}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='style/pagination.css') }}" type="text/css" >
+{% endblock %}
+{% block body_html %}
+{{ super() }}
+<div class="container mx-auto">
+
+	<div class="d-flex flex-row p-2">
+		<div class="card border-info">
+			<div class="card-header">Current Open Projects</div>
+			<div class="card-body text-info" id="currentProjects">
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Code</th>
+						<th scope="col">Status</th>
+					</tr>
+				</thead>
+				<tbody id="currentTable">
+
+				</tbody>
+			</table>
+		</div>
+		<script>
+		$('#currentProjects').pagination({
+			dataSource: function(done){
+				var result = [];
+				var pro = [];
+				$.get('/api/project', function(data) {
+					proArr = $.each(data.projects, function(index, value){
+						var pro = [];
+						pro['code'] = index;
+						pro['name'] = value;
+						result.push(pro)
+					});
+					console.log(result);
+					done(result);
+				});
+			},
+			locator: '0',
+			pageSize: 2,
+			callback: function(data, pagination) {
+				// template method of yourself
+				var html;
+				$.each(data, function(index, value){
+						html += "<tr>\
+							<th scope='row'></th>\
+							<td>" + value['name'] + "</td>\
+							<td>" + value['code'] + "</td>\
+							<td></td>\
+						<tr>"
+					})
+				$("#currentTable").html(html);
+			}
+		})
+		
+		</script>
+	</div>
+
+</div>
+{% endblock %}

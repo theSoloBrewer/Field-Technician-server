@@ -1,8 +1,8 @@
 from project import FTserver, db
-from flask_login import LoginManager, login_user, logout_user
+from flask_login import LoginManager, login_user, logout_user, current_user
 from flask import send_from_directory, render_template, request, flash, redirect, url_for, jsonify
 from models import *
-
+import api
 login = LoginManager(FTserver)
 
 
@@ -83,4 +83,8 @@ def favicon():
 @FTserver.route('/')
 @FTserver.route('/index')
 def indexView():
+	if current_user.is_authenticated:
+		p = Project.query.all()
+
+		return render_template('dashboard.html', title='Dashboard', active='dashboard', projects=p)
 	return render_template('index.html', title='Home', active='home')

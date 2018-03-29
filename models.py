@@ -5,7 +5,7 @@ Created on Nov 13, 2017
 '''
 from project import db, MA
 import random
-from marshmallow import Schema, fields, pprint
+
 from flask_login import UserMixin
 
 class Type(db.Model):
@@ -33,11 +33,7 @@ class Contact_Info(db.Model):
 		self.contact_name = name
 		self.email = email
 		self.phone = phone
-	def __repr__(self):
-		return '<%s:%s>' % (
-			self.__class__.__name__,
-			self.contact_name
-		)
+
 
 class ciSchema(MA.ModelSchema):
 	class Meta:
@@ -53,13 +49,6 @@ class Address(db.Model):
 		self.street = s
 		self.city = c
 		self.state = st
-	def __repr__(self):
-		return '<%s: street:%s, city:%s, state:%s>' % (
-			self.__class__.__name__,
-			self.street,
-			self.city,
-			self.state
-		)
 
 material_project = db.Table('material_project',db.Model.metadata,
 						 db.Column('project_id',db.Integer, db.ForeignKey('project.p_id')),
@@ -87,11 +76,7 @@ class Material_Location(db.Model):
 	def __init__(self,n,t=Type('unknown')):
 		self.ml_name = n
 		self.type = t
-	def __repr__(self):
-		return '<%s:%s>' % (
-			self.__class__.__name__,
-			self.ml_name
-		)
+
 class mlSchema(MA.ModelSchema):
 	class Meta:
 		model = Material_Location
@@ -113,11 +98,7 @@ class Material(db.Model):
 		self.status = status
 		self.type = mtype
 		self.location = material_location
-	def __repr__(self):
-		return '<%s:%s>' % (
-			self.__class__.__name__,
-			self.mat_name
-		)
+
 
 class materialSchema(MA.ModelSchema):
 	class Meta:
@@ -150,9 +131,6 @@ class User(UserMixin, db.Model):
 
 	def get_id(self):
 		return str(self.u_id)
-
-	def __repr__(self):
-		return '<User %r>' % (self.username)
 
 class Labor(db.Model):
 	l_id = db.Column(db.Integer, primary_key=True)
@@ -190,9 +168,7 @@ class Project(db.Model):
 		self.material = material
 		self.user = user
 		self.labor = labor
-	def __repr__(self):
-		return '<%s:%s, %s>' % (
-			self.__class__.__name__,
-			self.code,
-			self.pro_name
-		)
+
+class projectSchema(MA.ModelSchema):
+	class Meta:
+		model = Project

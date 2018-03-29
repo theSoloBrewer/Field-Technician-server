@@ -12,7 +12,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav bd-navbar-nav flex-row">
-                <li class="nav-item {% if active=='home' %}active{%endif %}"><a class="nav-link" href="/"><span class="glyphicon glyphicon-home"></span>Dashboard</a></li>
+                <li class="nav-item {% if active=='home' %}active{%endif %}"><a class="nav-link" href="/" id="dashboard"><span class="glyphicon glyphicon-home"></span>Dashboard</a></li>
                 {% if current_user.is_authenticated %}
                 <li class="nav-item {% if active=='calendar' %}active{%endif %}"><a class="nav-link"  href="calendar" ><span class="glyphicon glyphicon-calendar"></span>Calendar</a></li>
                 <li class="nav-item dropdown">

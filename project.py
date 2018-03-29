@@ -23,6 +23,7 @@ FTserver.config['SQLALCHEMY_MIGRATE_REPO'] = os.path.join(basedir, 'db_repositor
 FTserver.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 FTserver.secret_key = '5f4dcc3b5aa765d61d8327deb882cf99'
 MA = Marshmallow(FTserver)
+
 db = SQLAlchemy(FTserver, session_options={"autoflush": False})
 
 
