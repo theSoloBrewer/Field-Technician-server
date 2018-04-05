@@ -33,26 +33,25 @@
 				var pro = [];
 				$.get('/api/project', function(data) {
 					proArr = $.each(data.projects, function(index, value){
-						var pro = [];
-						pro['code'] = index;
-						pro['name'] = value;
-						result.push(pro)
+						pro[index] = value;
+						result = pro;
 					});
 					console.log(result);
 					done(result);
 				});
 			},
-			locator: '0',
+			locator: 'projects',
 			pageSize: 2,
 			callback: function(data, pagination) {
 				// template method of yourself
 				var html;
 				$.each(data, function(index, value){
+					var statusDict = {0:"Booked", 1:"Scheduled",2:"In-Progess",3:"Complete"};
 						html += "<tr>\
 							<th scope='row'></th>\
 							<td>" + value['name'] + "</td>\
 							<td>" + value['code'] + "</td>\
-							<td></td>\
+							<td>" + statusDict[value['status']] + "</td>\
 						<tr>"
 					})
 				$("#currentTable").html(html);

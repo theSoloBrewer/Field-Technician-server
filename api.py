@@ -46,11 +46,11 @@ SM = SessionManager()
 class Project(Resource):
 	def get(self, project_code=None):
 		if project_code is None:
-			pro_dict = dict()
+			pros_dict = dict()
 			pros = models.Project.query.all()
-			for pro in pros:
-				pro_dict[pro.code] = pro.pro_name
-			return{'projects': pro_dict}
+			for index, pro in enumerate(pros):
+				pros_dict[index] = {'code':pro.code,'name':pro.pro_name,'status':pro.status_id}
+			return{'projects': pros_dict}
 		else:
 			pro = models.Project.query.filter_by(code=project_code).first()
 			return{pro.code: pro.pro_name}

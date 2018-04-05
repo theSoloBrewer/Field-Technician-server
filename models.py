@@ -153,6 +153,8 @@ class Project(db.Model):
 	pro_name = db.Column(db.String(64),nullable=False)
 	code = db.Column(db.String(6), nullable=False, unique=True)
 	description = db.Column(db.Text)
+	status_id = db.Column(db.Integer, nullable=True)
+	#status = db.relationship(db.Integer, db.ForeignKey()
 	location_id = db.Column(db.Integer, db.ForeignKey('address.a_id'))
 	location = db.relationship('Address')
 	poc_id = db.Column(db.Integer, db.ForeignKey('contact_info.c_id'))
