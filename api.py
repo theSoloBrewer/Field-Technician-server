@@ -4,7 +4,7 @@ Created on Dec 11, 2017
 @author: theSoloBrewer
 '''
 
-from flask import request
+from flask import request, jsonify
 from flask_restful import Resource, Api
 import flask_restful as restful
 import pandas as pd
@@ -44,11 +44,39 @@ class SessionManager(Resource):
 SM = SessionManager()
 
 class Contact_Info(Resource):
-	def get(self):
-		pass
+	def get(self, cid=None):
+		response = models.Contact_Info.query.all()
+		if cid != None:
+			ciSchema = models.ciSchema()
+			ci = models.Contact_Info.query.filter_by(c_id=cid).first()
+			response = jsonify(ciSchema.dumps(ci).data)
+		return response
 	def put(self):
 		pass
-api.add_resource(Contact_Info, '/api/contact')
+api.add_resource(Contact_Info, '/api/contact', '/api/contact/<int:cid>')
+
+class Address(Resource):
+	def get(self, id=None):
+		response = models.Address.query.all()
+		if id != None:
+			aSchema = models.addrSchema()
+			addr = models.Address.query.filter_by(a_id=id).first()
+			response = jsonify(aSchema.dumps(addr).data)
+		return response
+	def put(self, id=None):
+		street = request.json['street']
+		city = request.json['city']
+		state = request.json['state']
+		addr = models.Address()
+		if id is not None:
+			addr = models.Address.get(id)
+		addr.street = street
+		addr.city = city
+		addr.state = state
+		SM.push(addr)
+		
+		
+api.add_resource(Address,'/api/address','/api/address/<int:id>')
 class Project(Resource):
 	def get(self, project_code=None):
 		if project_code is None:

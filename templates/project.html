@@ -54,10 +54,10 @@
 								</div>
 								</div>
 								<div class="row">
-								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="pocCardEdit">Edit</button>
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="pocCardEdit" onclick="modalMod('poc','{{ project.poc.c_id }}' )">Edit</button>
 								</div>
 							{% else %}
-								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="pocCardAdd">Add</button>
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="pocCardAdd" onclick="modalMod('pocNew')">Add</button>
 							{% endif %}
 							</div>
 						</div>
@@ -65,10 +65,11 @@
 					<script>
 					</script>
 				</div>
-				<div class="flex-row p-1">
-					<div class="card border-info" style="width:18rem; height:100%;">
-						<div class="card-header" id="locCardHeader">Address</div>
-						<div class="card-body text-info p-0 pt-2 px-3">
+
+			<div class="flex-row p-1">
+				<div class="card border-info" style="width:18rem; height:100%;">
+					<div class="card-header" id="locCardHeader">Address</div>
+					<div class="card-body text-info p-0 pt-2 px-3">
 						<div class="card-text" id="locCardText">
 						{% if project.location != None %}
 								<div class="row">
@@ -96,18 +97,15 @@
 								</div>
 								</div>
 								<div class="row">
-								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="locCardEdit">Edit</button>
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="locCardEdit" onclick="modalMod('loc','{{ project.location.a_id }}')">Edit</button>
 								</div>
 							{% else %}
-								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="locCardAdd">Add</button>
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="locCardAdd" onclick="modalMod('locNew')">Add</button>
 							{% endif %}
-							</div>
 						</div>
 					</div>
-					<script>
-					</script>
 				</div>
-
+			</div>
 			</div>
 		</div>
 	</form>
@@ -115,61 +113,127 @@
 		<div class="card border-info w-100">
 			<div class="card-header">Materials</div>
 			<div class="card-body text-info">
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">#</th>
-						<th scope="col">Name</th>
-						<th scope="col">Model</th>
-						<th scope="col">Type</th>
-						<th scope="col">S/N</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for m in materials %}
-					<tr>
-						<th scope="row">1</th>
-						<td>{{ m.mat_name }}</td>
-						<td>{{ m.mat_model }}</td>
-						<td>{{ m.type.name }}</td>
-						<td>{{ m.sn }}</td>
-					</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-			<div class="row">
-				<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="materialAdd">Add</button>
-			</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Name</th>
+							<th scope="col">Model</th>
+							<th scope="col">Type</th>
+							<th scope="col">S/N</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for m in materials %}
+						<tr>
+							<th scope="row">1</th>
+							<td>{{ m.mat_name }}</td>
+							<td>{{ m.mat_model }}</td>
+							<td>{{ m.type.name }}</td>
+							<td>{{ m.sn }}</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+				<div class="row">
+					<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="materialAdd">Add</button>
+				</div>
 			</div>
 		</div>
-		
 	</div>
 	<div class="row">
 		<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="projectSave">Save</button>
 	</div>
-		<div class="form-group row" style="display:none">
-			<div class="col">
-					<div class="row">
-						<div class="col">
-							<label class="col-form-label" for="mfFormControlSelect">Distributor: </label>
-							<select class="form-control" name="dist" id="dist">
-								<option></option>
-								{% for opt in distributors %}
-								<option value="{{ opt.c_id}}">{{ opt.contact_name }}</option>
-								{% endfor %}
-							</select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col">
-							<label class="col-form-label" for="mfFormControlSelect">Manufacturer: </label>
-							<input class="form-control " type="text" name="manu" placeholder="Manufacturer" >
-						</div>
-					</div>
-				</div>
+</div>
+<div class="modal fade" id="ContactAdd">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="modalTitle">Edit</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				
 			</div>
 		</div>
-
-
+	</div>
 </div>
+<script>
+function modalMod(p, id=null){
+	innerHTML = `
+		<div class="col">
+			<div class="row">
+				<div class="col">
+					<label class="col-form-label" id="ModalLabel1">Input1: </label>
+					<input class="form-control" type="text" id="ModalInput1" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label class="col-form-label" id="ModalLabel2">Input2: </label>
+					<input class="form-control" type="text" id="ModalInput2" >	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<label class="col-form-label" id="ModalLabel3">Input3: </label>
+					<input class="form-control" type="text" id="ModalInput3" >
+				</div>
+			</div>
+			<div class="row">
+				<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="ModalSave">Save</button>
+			</div>
+		</div>
+		`;
+	$('#ContactAdd .modal-body').html(innerHTML);
+	switch(p){
+	case 'locNew':
+		break;
+	case 'pocNew':
+		break;
+	case 'loc':
+		$.getJSON('/api/address/'+id,
+				  function(data){
+						var items = {};
+						$.each(JSON.parse(data),
+								function(k, v){
+									items[k]=v;
+									$("#modalTitle").html("Edit Address");
+									$("#ModalLabel1").html("Street: ");
+									$("#ModalInput1").val(items['street']);
+									$("#ModalLabel2").html("City: ");
+									$("#ModalInput2").val(items['city']);
+									$("#ModalLabel3").html("State: ");
+									$("#ModalInput3").attr({'type': 'email'});
+									$("#ModalInput3").val(items['state']);
+								});
+				  })
+		break;
+	case 'poc':
+		$.getJSON('/api/contact/'+id,
+				  function(data){
+						var items = {};
+						$.each(JSON.parse(data),
+								function(k, v){
+									items[k]=v;
+									$("#modalTitle").html("Edit "+ items['contact_name']);
+									$("#ModalLabel1").html("Name: ");
+									$("#ModalInput1").val(items['contact_name']);
+									$("#ModalLabel2").html("Phone: ");
+									$("#ModalInput2").val(items['phone']);
+									$("#ModalLabel3").html("Email: ");
+									$("#ModalInput3").attr({'type':'email'});
+									$("#ModalInput3").val(items['email']);
+								});
+				  })
+		break;
+		
+	}
+	$('#ContactAdd').modal().toggle();
+};
+
+$(function(){
+$('#ContactAdd').on('click', '#ModalSave', function (){console.log("saving...")})
+});
+</script>
 {% endblock %}
