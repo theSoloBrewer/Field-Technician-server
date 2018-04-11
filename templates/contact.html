@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block body_html %}
+{{ super() }}
+<div class="container mx-auto">
+	<div class="row h-100 justify-content-center mt-5">
+	<form style="width:37.87rem">
+		<div class="form-group row">
+			<div class="col-sm-10">
+				<label class="pr-2 col-form-label" for="nameControlSet">Name: </label>
+			</div>
+				<input class="form-control col-6 mx-3" type="text" name="name" placeholder="Material Name">
+
+		</div>
+		<div class="form-group row justify-content-center">
+			<div class="col">
+				<label class="pr-1 col-form-label" for="modelControlSet">Model Number: </label>
+
+				<input class="form-control " type="text" name="model" placeholder="Model Number" >
+			</div><div class="col">
+				<label class="pr-1 col-form-label" for="snControlSet">Serial Number: </label>
+
+				<input class="form-control " type="text" name="serial" placeholder="S/N" >
+			</div><div class="col">
+				<label class="pr-1 col-form-label" for="devTypeFormControlSelect">Device Type:</label>
+
+				<select class="form-control " name="devType" >
+					<option value="0"></option>
+					{% for opt in types %}
+					<option value="{{ opt.t_id}}">{{ opt.type_name }}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
+		 <div class="row form-group">
+			<div class="col">
+				<div class="row">
+					<div class="col">
+						<label class="col-form-label" for="mfFormControlSelect">Distributor: </label>
+						<select class="form-control" name="dist" id="dist">
+							<option></option>
+							{% for opt in distributors %}
+							<option value="{{ opt.c_id}}">{{ opt.contact_name }}</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<label class="col-form-label" for="mfFormControlSelect">Manufacturer: </label>
+						<input class="form-control " type="text" name="manu" placeholder="Manufacturer" >
+					</div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="card border-info ml-auto" style="width:18rem; height:100%;">
+					<div class="card-header" id="distCardHeader">Distributor</div>
+					<div class="card-body text-info p-0 pt-2 px-3">
+					<div class="card-text" id="distCardText">
+							<div class="row">
+							<div class="col-4">
+							<label>Phone:</label>
+							</div>
+							<div class="col-6">
+							<label id="distCardPhone"></label>
+							</div>
+							</div>
+							<div class="row">
+							<div class="col-4">
+							<label>Email:</label>
+							</div>
+							<div class="col-6">
+							<label id="distCardEmail"></label>
+							</div>
+							</div>
+							<div class="row">
+							<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="distCardEdit">Edit</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<script>
+					$(document).ready(function() {
+
+						$('#dist').change(function() {
+							var jqxhr = $.post(
+									"{{ url_for('materialView') }}",
+									{'dist': 'True', 'dist_id': $('#dist').val() },
+									function(data) {
+										$('#distCardHeader').html( data['contact_name'] )
+										$('#distCardPhone').html( data['phone']||'Not Listed' )
+										$('#distCardEmail').html( data['email'] )
+									},
+									"json"
+								).fail(function(data) {
+								$('#distCardText').html( data );
+								})
+						});
+					});
+				</script>
+			</div>
+		</div>
+		</div>
+	</form>
+	</div>
+</div>
+{% endblock %}
