@@ -8,17 +8,17 @@
 			<div class="d-flex flex-column p-2" style="flex:1">
 				<div class="flex-row">
 						<label class="pr-2 col-form-label" for="nameControlSet">Title: </label>
-						<input class="form-control" type="text" name="name" placeholder="Project Title">
+						<input class="form-control" type="text" name="name" placeholder="Project Title" value="{{project.pro_name if project != None}}">
 				</div>
 				<div class="flex-row">
 						<label class="pr-1 col-form-label" for="codeControlSet">Project Code: </label>
-						<input class="form-control" type="text" name="code" placeholder="Job Code" >
+						<input class="form-control" type="text" name="code" placeholder="Job Code" value="{{project.code if project != None}}">
 				</div>
 				<div class="flex-row h-100" style="flex-grow:1">
 					<div class="d-flex flex-column h-100" style="flex-grow:1">
 						<label class="pr-1 col-form-label" for="descControlSet">Description: </label>
 
-						<textarea class="form-control h-100" type="text" name="description" placeholder="Brief Description of Project" ></textarea>
+						<textarea class="form-control h-100" type="text" name="description" placeholder="Brief Description of Project" >{{project.description if project != None}}</textarea>
 				</div></div>
 			</div>
 			<div class="d-flex flex-column p-2">
@@ -28,12 +28,13 @@
 						<div class="card-header" id="locCardHeader">Point of Contact</div>
 						<div class="card-body text-info p-0 pt-2 px-3">
 						<div class="card-text" id="locCardText">
+						{% if project.poc !=None %}
 								<div class="row">
 								<div class="col-4">
 								<label>Name:</label>
 								</div>
 								<div class="col-6">
-								<label id="pocCardName"></label>
+								<label id="pocCardName">{{ project.poc.contact_name }}</label>
 								</div>
 								</div>
 								<div class="row">
@@ -53,8 +54,11 @@
 								</div>
 								</div>
 								<div class="row">
-								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="distCardEdit">Edit</button>
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="pocCardEdit">Edit</button>
 								</div>
+							{% else %}
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="pocCardAdd">Add</button>
+							{% endif %}
 							</div>
 						</div>
 					</div>
@@ -66,12 +70,13 @@
 						<div class="card-header" id="locCardHeader">Address</div>
 						<div class="card-body text-info p-0 pt-2 px-3">
 						<div class="card-text" id="locCardText">
+						{% if project.location != None %}
 								<div class="row">
 								<div class="col-4">
 								<label>Street:</label>
 								</div>
 								<div class="col-6">
-								<label id="locCardStreet"></label>
+								<label id="locCardStreet">{{ project.location.street }}</label>
 								</div>
 								</div>
 								<div class="row">
@@ -79,7 +84,7 @@
 								<label>City:</label>
 								</div>
 								<div class="col-6">
-								<label id="locCardCity"></label>
+								<label id="locCardCity">{{ project.location.city }}</label>
 								</div>
 								</div>
 								<div class="row">
@@ -87,12 +92,15 @@
 								<label>State:</label>
 								</div>
 								<div class="col-6">
-								<label id="locCardState"></label>
+								<label id="locCardState">{{ project.location.state }}</label>
 								</div>
 								</div>
 								<div class="row">
-								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="distCardEdit">Edit</button>
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="locCardEdit">Edit</button>
 								</div>
+							{% else %}
+								<button class="m-2 btn btn-outline-info ml-auto" href="#" type="button" name="locCardAdd">Add</button>
+							{% endif %}
 							</div>
 						</div>
 					</div>

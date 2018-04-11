@@ -12,16 +12,16 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav bd-navbar-nav flex-row">
-                <li class="nav-item {% if active=='home' %}active{%endif %}"><a class="nav-link" href="/" id="dashboard"><span class="glyphicon glyphicon-home"></span>Dashboard</a></li>
+                <li class="nav-item {% if active=='home' %}active{%endif %}"><a class="nav-link" href="/" id="dashboard"><span class="fas fa-home"></span>Dashboard</a></li>
                 {% if current_user.is_authenticated %}
-                <li class="nav-item {% if active=='calendar' %}active{%endif %}"><a class="nav-link"  href="calendar" ><span class="glyphicon glyphicon-calendar"></span>Calendar</a></li>
+                <li class="nav-item {% if active=='calendar' %}active{%endif %}"><a class="nav-link"  href="calendar" ><span class="fas fa-calendar-alt"></span>Calendar</a></li>
                 <li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				  Tools
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 				  <a class="dropdown-item" href="/project/new" id="cProject" >Create Project</a>
-				  <a class="dropdown-item" href="/project/edit" id="eProject" >Edit Project</a>
+				  <a class="dropdown-item" href="/project/list" id="eProject" >Edit Project</a>
 				  <div class="dropdown-divider"></div>
 				  <a class="dropdown-item"  href="#">Customers</a>
 				  <div class="dropdown-divider"></div>
@@ -48,7 +48,7 @@
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><span
-						class="glyphicon glyphicon-comment"></span>Chats <span class="badge badge-secondary">42</span>
+						class="fas fa-comment"></span>Chats <span class="badge badge-secondary">42</span>
 					</a>
 					<div class="dropdown-menu">
 						<a class="dropdown-item" href="#"><span class="badge badge-warning">7:00 AM</span>Hi :)</a>
@@ -60,7 +60,7 @@
                 </li>
                 <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle"  href="#" data-toggle="dropdown"><span
-						class="glyphicon glyphicon-envelope"></span>Inbox <span class="badge badge-info">32</span>
+						class="fas fa-envelope"></span>Inbox <span class="badge badge-info">32</span>
 					</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#"><span class="badge badge-warning">4:00 AM</span>Favourites Snippet</a>
@@ -72,7 +72,7 @@
                 </li>
                 <li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle"  href="#" data-toggle="dropdown"><span
-						class="glyphicon glyphicon-user"></span>{{ current_user.username }} <b class="caret"></b>
+						class="fas fa-user-circle"></span>{{ current_user.username }} <b class="caret"></b>
 					</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#"><span class="glyphicon glyphicon-user"></span>Profile</a>

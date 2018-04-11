@@ -19,13 +19,29 @@ class Type(db.Model):
 class typeSchema(MA.ModelSchema):
 	class Meta:
 		model = Type
-
+		
+class Address(db.Model):
+	a_id = db.Column(db.Integer, primary_key=True)
+	street = db.Column(db.String(128), unique=True, nullable=False)
+	city = db.Column(db.String(128), unique=False, nullable=False)
+	state = db.Column(db.String(64), unique=False, nullable=False)
+	#geo in the future
+	def __init__(self,s='',c='',st=''):
+		self.street = s
+		self.city = c
+		self.state = st
+		
+class addrSchema(MA.ModelSchema):
+	class Meta:
+		model = Address
 class Contact_Info(db.Model):
 	__tablename__ = 'contact_info'
 	c_id = db.Column(db.Integer, primary_key=True)
 	contact_name = db.Column(db.String(64), nullable=False)
 	email = db.Column(db.String(128), unique=True)
 	phone = db.Column(db.Integer, unique=False)
+	addr_id = db.Column(db.Integer, db.ForeignKey('address.a_id'))
+	addr = db.relationship('Address')
 	c_type_id = db.Column( db.Integer,db.ForeignKey('type.t_id'))
 	c_type = db.relationship('Type')
 
@@ -39,16 +55,7 @@ class ciSchema(MA.ModelSchema):
 	class Meta:
 		model = Contact_Info
 
-class Address(db.Model):
-	a_id = db.Column(db.Integer, primary_key=True)
-	street = db.Column(db.String(128), unique=True, nullable=False)
-	city = db.Column(db.String(128), unique=False, nullable=False)
-	state = db.Column(db.String(64), unique=False, nullable=False)
-	#geo in the future
-	def __init__(self,s='',c='',st=''):
-		self.street = s
-		self.city = c
-		self.state = st
+
 
 material_project = db.Table('material_project',db.Model.metadata,
 						 db.Column('project_id',db.Integer, db.ForeignKey('project.p_id')),

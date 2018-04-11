@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block head %}
+{{ super () }}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.30.1/js/jquery.tablesorter.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.30.1/css/theme.bootstrap_4.min.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.30.1/js/jquery.tablesorter.widgets.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.30.1/css/widget.grouping.min.css">
+
+{% endblock %}
+
+{% block body_html %}
+{{ super() }}
+<div class="container mx-auto">
+
+	<div class="d-flex flex-row p-2">
+		<div class="card border-info w-100">
+			<div class="card-header">Projects</div>
+			<div class="card-body text-info">
+			<div class="d-inline-flex">
+			<button type="button" class="reset btn btn-outline-info" data-column="0" data-filter="">Reset filters</button>
+			</div>
+			<div class="d-inline-flex w-75">
+				<table class="table table-hover tablesorter" id="projectsTable">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Name</th>
+							<th>Job Code</th>
+							<th>Location</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% set statusDict = {0:"Booked", 1:"Scheduled",2:"In-Progess",3:"Complete"} %}
+						{% for p in projects %}
+						<tr onclick=editProject("{{p.code}}")>
+							<th scope="row">{{ p.p_id }}</th>
+							<td>{{ p.pro_name }}</td>
+							<td>{{ p.code }}</td>
+							<td>{{ [p.location.city,  p.location.state]|join(', ') if p.location != None else 'Unkown'}}<td>
+							<td>{{ statusDict[p.status_id] }}</td>
+							
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="row">
+				<button class="m-2 btn btn-outline-info ml-auto" id="projectAdd" onclick="location.href='/project/new'" type="button" name="projectAdd">Add</button>
+			</div>
+			</div>
+		</div>
+		
+	</div>
+	<style>
+		.tablesorter-icon {
+			float: right;
+		}
+	</style>
+	<script>
+	$(document).ready(function() 
+    { 
+		$.extend($.tablesorter.themes.jui,{
+			sortNone     : 'testClass',
+			iconSortNone : 'fas fa-sort',
+			iconSortAsc  : 'fas fa-chevron-up',
+			iconSortDesc : 'fas fa-chevron-down',
+		});
+		
+        $("#projectsTable").tablesorter({
+			theme: 'jui',
+			widgets : ['uitheme', 'filter'],
+			widgetOptions: {
+				filter_reset : 'button.reset',
+				filter_cssFilter: [
+					'form-control',
+					'form-control',
+					'form-control',
+					'form-control'
+				]
+			},
+			headerTemplate: '{content}{icon}'
+		});
+
+
+
+    });
+	function editProject(p)
+	{
+		var url = '/project/edit';
+		var form = $('<form action="' + url + '" method="post">' +
+		  '<input type="text" name="code" value="'+ p +'" />' +
+		  '</form>');
+		$('body').append(form);
+		form.submit();
+	}
+	
+	</script>
+
+</div>
+{% endblock %}

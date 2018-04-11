@@ -43,6 +43,12 @@ class SessionManager(Resource):
 
 SM = SessionManager()
 
+class Contact_Info(Resource):
+	def get(self):
+		pass
+	def put(self):
+		pass
+api.add_resource(Contact_Info, '/api/contact')
 class Project(Resource):
 	def get(self, project_code=None):
 		if project_code is None:
@@ -68,9 +74,6 @@ class Project(Resource):
 		pro = models.Project.query.filter_by(code=project_code).first()
 		if SM.remove(pro)['status'] is 'ok':
 			return{'status':'ok'}
-
-
-
 api.add_resource(Project, '/api/project', '/api/project/<string:project_code>')
 
 class Mat_Loc(Resource):
@@ -84,7 +87,6 @@ class Mat_Loc(Resource):
 			ml = models.Material_Location.query.filter_by(ml_name=cloc[0].ml_name).one()
 			ml.type = cloc[0]
 		return ml
-
 
 	def get(self, request, loc_id, loc_type):
 
@@ -107,7 +109,6 @@ class Type(Resource):
 			restful.abort(501)
 		return t
 
-
 	def update_type(self, request, type_name=None):
 		if type_name is None:
 			try:
@@ -129,10 +130,7 @@ class Type(Resource):
 		t = models.Type.query.filter_by(type_name=type_name).one()
 		return t
 
-
-
 class Materials(Resource):
-
 	def new_material(self, request, project_code=None):
 		try:
 			###
@@ -194,8 +192,6 @@ class Materials(Resource):
 				return{'status':'err'}
 		return{'status':'err'}
 
-
-
 	def update_material(self, request, mat_id, project_code=None):
 		if mat_id is None:
 			try:
@@ -217,8 +213,6 @@ class Materials(Resource):
 			except:
 				restful.abort(501)
 
-
-
 	def get(self, project_code=None):
 		mat_dict = dict()
 		if project_code is None:
@@ -235,7 +229,6 @@ class Materials(Resource):
 			restful.abort(404)
 		return mat_dict
 
-
 	def put(self,project_code=None,mat_id=None):
 		#
 		## is a new material
@@ -248,15 +241,10 @@ class Materials(Resource):
 			print('old')
 			self.update_material( request.json,mat_id, project_code)
 
-
 	def delete(self, mat_id):
 		mID = models.Material.query.filter_by(m_id=mat_id).first()
 		if SM.remove(mID)['status'] is 'ok':
 			return{'status':'ok'}
-
-
-
-
 
 api.add_resource(Materials,'/api/project/<string:project_code>/material/',
 				 '/api/material/',

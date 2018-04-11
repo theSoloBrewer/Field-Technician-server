@@ -69,8 +69,14 @@ def materialView():
 @FTserver.route('/project/<string:act>', methods=['GET','POST'])
 def projectView(act):
 	if act == 'new':
-		return render_template("project.html", active='cProject', title='New Project')
-	return render_template("project.html", active='eProject', title='Edit Project')
+		return render_template("project.html", active='cProject', title='New Project', project=None)
+	if act == 'list':
+		p = Project.query.all()
+		return render_template("project_list.html", active='eProject', title='Projects List', projects=p)
+	if act == 'edit':
+		p = Project.query.filter_by(code = request.form['code']).first()
+		return render_template("project.html", active='eProject', title='Edit Project', project=p)
+	return render_template("project.html", active='eProject', title='Project List')
 
 @FTserver.route('/calendar')
 def calendarView():
