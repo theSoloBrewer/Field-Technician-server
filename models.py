@@ -181,3 +181,4 @@ class Project(db.Model):
 class projectSchema(MA.ModelSchema):
 	class Meta:
 		model = Project
+

@@ -1,0 +1,588 @@
+[
+    {
+        "package": {
+            "key": "wtforms",
+            "package_name": "WTForms",
+            "installed_version": "2.1"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "whoosh",
+            "package_name": "Whoosh",
+            "installed_version": "2.7.4"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "werkzeug",
+            "package_name": "Werkzeug",
+            "installed_version": "0.12.2"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "urllib3",
+            "package_name": "urllib3",
+            "installed_version": "1.22"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "tempita",
+            "package_name": "Tempita",
+            "installed_version": "0.5.2"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "sqlparse",
+            "package_name": "sqlparse",
+            "installed_version": "0.2.4"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "sqlalchemy",
+            "package_name": "SQLAlchemy",
+            "installed_version": "1.1.14"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "sqlalchemy-migrate",
+            "package_name": "sqlalchemy-migrate",
+            "installed_version": "0.11.0"
+        },
+        "dependencies": [
+            {
+                "key": "pbr",
+                "package_name": "pbr",
+                "installed_version": "3.1.1",
+                "required_version": ">=1.8"
+            },
+            {
+                "key": "sqlalchemy",
+                "package_name": "SQLAlchemy",
+                "installed_version": "1.1.14",
+                "required_version": ">=0.7.8,!=0.9.5"
+            },
+            {
+                "key": "decorator",
+                "package_name": "decorator",
+                "installed_version": "4.1.2",
+                "required_version": null
+            },
+            {
+                "key": "six",
+                "package_name": "six",
+                "installed_version": "1.11.0",
+                "required_version": ">=1.7.0"
+            },
+            {
+                "key": "sqlparse",
+                "package_name": "sqlparse",
+                "installed_version": "0.2.4",
+                "required_version": null
+            },
+            {
+                "key": "tempita",
+                "package_name": "Tempita",
+                "installed_version": "0.5.2",
+                "required_version": ">=0.4"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "six",
+            "package_name": "six",
+            "installed_version": "1.11.0"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "setuptools",
+            "package_name": "setuptools",
+            "installed_version": "28.8.0"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "requests",
+            "package_name": "requests",
+            "installed_version": "2.18.4"
+        },
+        "dependencies": [
+            {
+                "key": "chardet",
+                "package_name": "chardet",
+                "installed_version": "3.0.4",
+                "required_version": "<3.1.0,>=3.0.2"
+            },
+            {
+                "key": "urllib3",
+                "package_name": "urllib3",
+                "installed_version": "1.22",
+                "required_version": "<1.23,>=1.21.1"
+            },
+            {
+                "key": "certifi",
+                "package_name": "certifi",
+                "installed_version": "2017.11.5",
+                "required_version": ">=2017.4.17"
+            },
+            {
+                "key": "idna",
+                "package_name": "idna",
+                "installed_version": "2.6",
+                "required_version": ">=2.5,<2.7"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "pytz",
+            "package_name": "pytz",
+            "installed_version": "2017.3"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "python-dateutil",
+            "package_name": "python-dateutil",
+            "installed_version": "2.6.1"
+        },
+        "dependencies": [
+            {
+                "key": "six",
+                "package_name": "six",
+                "installed_version": "1.11.0",
+                "required_version": ">=1.5"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "pipdeptree",
+            "package_name": "pipdeptree",
+            "installed_version": "0.12.1"
+        },
+        "dependencies": [
+            {
+                "key": "pip",
+                "package_name": "pip",
+                "installed_version": "9.0.1",
+                "required_version": ">=6.0.0"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "pip",
+            "package_name": "pip",
+            "installed_version": "9.0.1"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "pbr",
+            "package_name": "pbr",
+            "installed_version": "3.1.1"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "pandas",
+            "package_name": "pandas",
+            "installed_version": "0.21.1"
+        },
+        "dependencies": [
+            {
+                "key": "python-dateutil",
+                "package_name": "python-dateutil",
+                "installed_version": "2.6.1",
+                "required_version": ">=2"
+            },
+            {
+                "key": "numpy",
+                "package_name": "numpy",
+                "installed_version": "1.13.3",
+                "required_version": ">=1.9.0"
+            },
+            {
+                "key": "pytz",
+                "package_name": "pytz",
+                "installed_version": "2017.3",
+                "required_version": ">=2011k"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "numpy",
+            "package_name": "numpy",
+            "installed_version": "1.13.3"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "marshmallow",
+            "package_name": "marshmallow",
+            "installed_version": "2.15.0"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "marshmallow-sqlalchemy",
+            "package_name": "marshmallow-sqlalchemy",
+            "installed_version": "0.13.2"
+        },
+        "dependencies": [
+            {
+                "key": "marshmallow",
+                "package_name": "marshmallow",
+                "installed_version": "2.15.0",
+                "required_version": ">=2.0.0"
+            },
+            {
+                "key": "sqlalchemy",
+                "package_name": "SQLAlchemy",
+                "installed_version": "1.1.14",
+                "required_version": ">=0.9.7"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "markupsafe",
+            "package_name": "MarkupSafe",
+            "installed_version": "1.0"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "jinja2",
+            "package_name": "Jinja2",
+            "installed_version": "2.9.6"
+        },
+        "dependencies": [
+            {
+                "key": "markupsafe",
+                "package_name": "MarkupSafe",
+                "installed_version": "1.0",
+                "required_version": ">=0.23"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "itsdangerous",
+            "package_name": "itsdangerous",
+            "installed_version": "0.24"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "idna",
+            "package_name": "idna",
+            "installed_version": "2.6"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "flask",
+            "package_name": "Flask",
+            "installed_version": "0.12.2"
+        },
+        "dependencies": [
+            {
+                "key": "itsdangerous",
+                "package_name": "itsdangerous",
+                "installed_version": "0.24",
+                "required_version": ">=0.21"
+            },
+            {
+                "key": "click",
+                "package_name": "click",
+                "installed_version": "6.7",
+                "required_version": ">=2.0"
+            },
+            {
+                "key": "werkzeug",
+                "package_name": "Werkzeug",
+                "installed_version": "0.12.2",
+                "required_version": ">=0.7"
+            },
+            {
+                "key": "jinja2",
+                "package_name": "Jinja2",
+                "installed_version": "2.9.6",
+                "required_version": ">=2.4"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "flask-wtf",
+            "package_name": "Flask-WTF",
+            "installed_version": "0.14.2"
+        },
+        "dependencies": [
+            {
+                "key": "flask",
+                "package_name": "Flask",
+                "installed_version": "0.12.2",
+                "required_version": null
+            },
+            {
+                "key": "wtforms",
+                "package_name": "WTForms",
+                "installed_version": "2.1",
+                "required_version": null
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "flask-whooshalchemy",
+            "package_name": "Flask-WhooshAlchemy",
+            "installed_version": "0.56"
+        },
+        "dependencies": [
+            {
+                "key": "flask-sqlalchemy",
+                "package_name": "Flask-SQLAlchemy",
+                "installed_version": "2.3.2",
+                "required_version": null
+            },
+            {
+                "key": "sqlalchemy",
+                "package_name": "SQLAlchemy",
+                "installed_version": "1.1.14",
+                "required_version": null
+            },
+            {
+                "key": "whoosh",
+                "package_name": "Whoosh",
+                "installed_version": "2.7.4",
+                "required_version": null
+            },
+            {
+                "key": "blinker",
+                "package_name": "blinker",
+                "installed_version": "1.4",
+                "required_version": null
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "flask-sqlalchemy",
+            "package_name": "Flask-SQLAlchemy",
+            "installed_version": "2.3.2"
+        },
+        "dependencies": [
+            {
+                "key": "flask",
+                "package_name": "Flask",
+                "installed_version": "0.12.2",
+                "required_version": ">=0.10"
+            },
+            {
+                "key": "sqlalchemy",
+                "package_name": "SQLAlchemy",
+                "installed_version": "1.1.14",
+                "required_version": ">=0.8.0"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "flask-restful",
+            "package_name": "Flask-RESTful",
+            "installed_version": "0.3.6"
+        },
+        "dependencies": [
+            {
+                "key": "six",
+                "package_name": "six",
+                "installed_version": "1.11.0",
+                "required_version": ">=1.3.0"
+            },
+            {
+                "key": "flask",
+                "package_name": "Flask",
+                "installed_version": "0.12.2",
+                "required_version": ">=0.8"
+            },
+            {
+                "key": "pytz",
+                "package_name": "pytz",
+                "installed_version": "2017.3",
+                "required_version": null
+            },
+            {
+                "key": "aniso8601",
+                "package_name": "aniso8601",
+                "installed_version": "1.3.0",
+                "required_version": ">=0.82"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "flask-marshmallow",
+            "package_name": "flask-marshmallow",
+            "installed_version": "0.8.0"
+        },
+        "dependencies": [
+            {
+                "key": "marshmallow",
+                "package_name": "marshmallow",
+                "installed_version": "2.15.0",
+                "required_version": ">=2.0.0"
+            },
+            {
+                "key": "flask",
+                "package_name": "Flask",
+                "installed_version": "0.12.2",
+                "required_version": null
+            },
+            {
+                "key": "six",
+                "package_name": "six",
+                "installed_version": "1.11.0",
+                "required_version": ">=1.9.0"
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "flask-login",
+            "package_name": "Flask-Login",
+            "installed_version": "0.4.0"
+        },
+        "dependencies": [
+            {
+                "key": "flask",
+                "package_name": "Flask",
+                "installed_version": "0.12.2",
+                "required_version": null
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "flask-debugtoolbar",
+            "package_name": "Flask-DebugToolbar",
+            "installed_version": "0.10.1"
+        },
+        "dependencies": [
+            {
+                "key": "itsdangerous",
+                "package_name": "itsdangerous",
+                "installed_version": "0.24",
+                "required_version": null
+            },
+            {
+                "key": "flask",
+                "package_name": "Flask",
+                "installed_version": "0.12.2",
+                "required_version": ">=0.8"
+            },
+            {
+                "key": "werkzeug",
+                "package_name": "werkzeug",
+                "installed_version": "0.12.2",
+                "required_version": null
+            },
+            {
+                "key": "blinker",
+                "package_name": "Blinker",
+                "installed_version": "1.4",
+                "required_version": null
+            }
+        ]
+    },
+    {
+        "package": {
+            "key": "decorator",
+            "package_name": "decorator",
+            "installed_version": "4.1.2"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "cython",
+            "package_name": "Cython",
+            "installed_version": "0.27.1"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "click",
+            "package_name": "click",
+            "installed_version": "6.7"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "chardet",
+            "package_name": "chardet",
+            "installed_version": "3.0.4"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "certifi",
+            "package_name": "certifi",
+            "installed_version": "2017.11.5"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "blinker",
+            "package_name": "blinker",
+            "installed_version": "1.4"
+        },
+        "dependencies": []
+    },
+    {
+        "package": {
+            "key": "aniso8601",
+            "package_name": "aniso8601",
+            "installed_version": "1.3.0"
+        },
+        "dependencies": [
+            {
+                "key": "python-dateutil",
+                "package_name": "python-dateutil",
+                "installed_version": "2.6.1",
+                "required_version": null
+            }
+        ]
+    }
+]
