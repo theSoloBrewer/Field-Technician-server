@@ -58,5 +58,6 @@ def flaskrun(app, default_host="127.0.0.1",
 
 if __name__ == "__main__":
 	FTserver.debug = True
+	FTserver.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 	DebugToolbarExtension(FTserver)
 	FTserver.run()

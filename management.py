@@ -6,7 +6,8 @@ Created on Oct 18, 2017
 from migrate.versioning import api
 import os.path, sys
 import imp
-import models, project
+import project
+from models import *
 import optparse
 
 def managerun(cmd='db_migrate', app='FTserver', database='db'):

@@ -1,7 +1,8 @@
 from project import FTserver, db
 from flask_login import LoginManager, login_user, logout_user, current_user
 from flask import send_from_directory, render_template, request, flash, redirect, url_for, jsonify
-from models import *
+from models.core import *
+from models.user import *
 import api
 login = LoginManager(FTserver)
 

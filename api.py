@@ -10,7 +10,8 @@ import flask_restful as restful
 import pandas as pd
 from sqlalchemy import exc, or_, and_
 from sqlalchemy.orm.exc import NoResultFound
-import models, project, sys, random, csv, json, requests, time
+from models.core import *
+import project, sys, random, csv, json, requests, time
 from pip._vendor.pyparsing import Empty
 
 api = Api(project.FTserver)
@@ -45,11 +46,11 @@ SM = SessionManager()
 
 class Contact_Info(Resource):
 	def get(self, cid=None):
-		response = models.Contact_Info.query.all()
+		response = Contact_Info.query.all()
 		if cid != None:
-			ciSchema = models.ciSchema()
-			ci = models.Contact_Info.query.filter_by(c_id=cid).first()
-			response = jsonify(ciSchema.dumps(ci).data)
+			ciS = ciSchema()
+			ci = Contact_Info.query.filter_by(c_id=cid).first()
+			response = jsonify(ciS.dumps(ci).data)
 		return response
 	def put(self):
 		pass
@@ -59,17 +60,17 @@ class Address(Resource):
 	def get(self, id=None):
 		response = models.Address.query.all()
 		if id != None:
-			aSchema = models.addrSchema()
-			addr = models.Address.query.filter_by(a_id=id).first()
+			aSchema = addrSchema()
+			addr = Address.query.filter_by(a_id=id).first()
 			response = jsonify(aSchema.dumps(addr).data)
 		return response
 	def put(self, id=None):
 		street = request.json['street']
 		city = request.json['city']
 		state = request.json['state']
-		addr = models.Address()
+		addr = Address()
 		if id is not None:
-			addr = models.Address.get(id)
+			addr = Address.get(id)
 		addr.street = street
 		addr.city = city
 		addr.state = state
@@ -81,25 +82,25 @@ class Project(Resource):
 	def get(self, project_code=None):
 		if project_code is None:
 			pros_dict = dict()
-			pros = models.Project.query.all()
+			pros = Project.query.all()
 			for index, pro in enumerate(pros):
 				pros_dict[index] = {'code':pro.code,'name':pro.pro_name,'status':pro.status_id}
 			return{'projects': pros_dict}
 		else:
-			pro = models.Project.query.filter_by(code=project_code).first()
+			pro = Project.query.filter_by(code=project_code).first()
 			return{pro.code: pro.pro_name}
 
 	def put(self):
 		name = request.json['name']
 		code = request.json['code']
 		if name is not None and code is not None:
-			pro = models.Project(name, code)
+			pro = Project(name, code)
 			if SM.push(pro)['status'] is 'ok':
 				print(pro)
 
 	def delete(self, project_code):
 		print('deleting project code number:'+project_code)
-		pro = models.Project.query.filter_by(code=project_code).first()
+		pro = Project.query.filter_by(code=project_code).first()
 		if SM.remove(pro)['status'] is 'ok':
 			return{'status':'ok'}
 api.add_resource(Project, '/api/project', '/api/project/<string:project_code>')
@@ -112,18 +113,18 @@ class Mat_Loc(Resource):
 		if len(cloc) > 1:
 			restful.abort(501)
 		else:
-			ml = models.Material_Location.query.filter_by(ml_name=cloc[0].ml_name).one()
+			ml = Material_Location.query.filter_by(ml_name=cloc[0].ml_name).one()
 			ml.type = cloc[0]
 		return ml
 
 	def get(self, request, loc_id, loc_type):
 
-		l = models.Type.query.filter_by(t_id=loc_id).all()
+		l = Type.query.filter_by(t_id=loc_id).all()
 		return l
 
 	def getByName(self,request, loc_name, loc_type):
 		try:
-			l = models.Material_Location.query.filter_by(ml_name=loc_name).all()
+			l = Material_Location.query.filter_by(ml_name=loc_name).all()
 			ml = self.update_Loc(request, l)
 		except NoResultFound:
 			self.new_Loc(request, loc_type)
@@ -132,7 +133,7 @@ class Mat_Loc(Resource):
 class Type(Resource):
 	def new_Type(self, request):
 		try:
-			t = models.Type(request['name'])
+			t = Type(request['name'])
 		except:
 			restful.abort(501)
 		return t
@@ -149,13 +150,13 @@ class Type(Resource):
 		if type_id is None:
 			print('get type')
 			restful.abort(404)
-		t = models.Type.query.filter_by(t_id=type_id).one()
+		t = Type.query.filter_by(t_id=type_id).one()
 		return t
 
 	def getByName(self, type_name=None):
 		if type_name is None:
 			restful.abort(404)
-		t = models.Type.query.filter_by(type_name=type_name).one()
+		t = Type.query.filter_by(type_name=type_name).one()
 		return t
 
 class Materials(Resource):
@@ -165,12 +166,12 @@ class Materials(Resource):
 			### does this material already exist
 			###
 			###
-			mat = models.Material.query.filter(
+			mat = Material.query.filter(
 				or_(
-					models.Material.sn==request['mat_sn'],
+					Material.sn==request['mat_sn'],
 					and_(
-						models.Material.location.has(models.Material_Location.ml_name==request['mat_loc']['name']),
-						models.Material.mat_name==request['mat_name']
+						Material.location.has(Material_Location.ml_name==request['mat_loc']['name']),
+						Material.mat_name==request['mat_name']
 					)
 			)).one()
 			restful.abort(409)
@@ -191,15 +192,15 @@ class Materials(Resource):
 				#mat_loc = models.Material_Location.query.filter_by(ml_name=m_loc.name).one()
 			except NoResultFound:
 				try:
-					mlt = models.Type(request['mat_loc']['type']['name'])
-					mat_loc = models.Material_Location(request['mat_loc']['name'],mlt)
+					mlt = Type(request['mat_loc']['type']['name'])
+					mat_loc = Material_Location(request['mat_loc']['name'],mlt)
 				except:
 					raise ValueError("can't create Material Location")
 			mat_name = request['mat_name']
 			mat_sn = request['mat_sn']
 			if mat_sn is None or mat_sn:
 				mat_sn = random.getrandbits(24)
-			mat = models.Material(mat_type, mat_loc, mat_name, mat_sn)
+			mat = Material(mat_type, mat_loc, mat_name, mat_sn)
 
 
 		#
@@ -211,7 +212,7 @@ class Materials(Resource):
 				return{'status':'ok'}
 		else:
 			try:
-				p = models.Project.query.filter_by(code=project_code).one()
+				p = Project.query.filter_by(code=project_code).one()
 				p.material.append(mat)
 				SM.push(p)
 				return{'status':'ok'}
@@ -224,10 +225,10 @@ class Materials(Resource):
 		if mat_id is None:
 			try:
 				print(json.dumps(request))
-				mat_id = models.Material.query.filter_by(mat_name=request['mat_name']).one().m_id
+				mat_id = Material.query.filter_by(mat_name=request['mat_name']).one().m_id
 			except:
 				restful.abort(404)
-		mat = models.Material.query.filter_by(m_id=mat_id).one()
+		mat = Material.query.filter_by(m_id=mat_id).one()
 		print('update', mat_id)
 		if project_code is None:
 			try:
@@ -236,7 +237,7 @@ class Materials(Resource):
 				restful.abort(501)
 		else:
 			try:
-				p = models.Project.query.filter_by(code=project_code).one()
+				p = Project.query.filter_by(code=project_code).one()
 				SM.push(p)
 			except:
 				restful.abort(501)
@@ -244,13 +245,13 @@ class Materials(Resource):
 	def get(self, project_code=None):
 		mat_dict = dict()
 		if project_code is None:
-			mats = models.Material.query.all()
+			mats = Material.query.all()
 		elif project_code is not None:
-			if models.Project.query.filter_by(code=project_code).all() is None:
+			if Project.query.filter_by(code=project_code).all() is None:
 				return{'status':'err'}
-			mats = models.Material.query.filter(models.Material.project.any(code=project_code)).all()
+			mats = Material.query.filter(Material.project.any(code=project_code)).all()
 		for mat in mats:
-			schema = models.materialSchema()
+			schema = materialSchema()
 			result = schema.dump(mat)
 			mat_dict[mat.m_id]=result.data
 		if not bool(mat_dict):
@@ -270,7 +271,7 @@ class Materials(Resource):
 			self.update_material( request.json,mat_id, project_code)
 
 	def delete(self, mat_id):
-		mID = models.Material.query.filter_by(m_id=mat_id).first()
+		mID = Material.query.filter_by(m_id=mat_id).first()
 		if SM.remove(mID)['status'] is 'ok':
 			return{'status':'ok'}
 
